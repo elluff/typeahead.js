@@ -23,6 +23,7 @@ var DropdownView = (function() {
     this.isOpen = false;
     this.isEmpty = true;
     this.isMouseOverDropdown = false;
+    this.eventBus = o.eventBus;
 
     this.$menu = $(o.menu)
     .on('mouseenter.tt', this._handleMouseenter)
@@ -100,6 +101,7 @@ var DropdownView = (function() {
       this._ensureVisibility($underCursor);
 
       this.trigger('cursorMoved', extractSuggestion($underCursor));
+      this.eventBus.trigger("cursorMoved", extractSuggestion($underCursor), extractSuggestion($cur));
     },
 
     _getSuggestions: function() {
